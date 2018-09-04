@@ -16,6 +16,8 @@
         <module>logistics-manage-dao</module>
         <module>logistics-manage-service</module>
         <module>logistics-manage-web</module>
+        <module>logistics-manage-interface</module>
+        <module>logistics-manage-pojo</module>
     </modules>
 
     <dependencies>
