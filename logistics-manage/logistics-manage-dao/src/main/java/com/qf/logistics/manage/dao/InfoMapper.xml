@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.InfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.logistics.manage.pojo.po.Info" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gid" property="gid" jdbcType="INTEGER" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="saddress" property="saddress" jdbcType="VARCHAR" />
+    <result column="nid" property="nid" jdbcType="INTEGER" />
+    <result column="node1" property="node1" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="TIMESTAMP" />
+    <result column="city1" property="city1" jdbcType="VARCHAR" />
+    <result column="time2" property="time2" jdbcType="TIMESTAMP" />
+    <result column="center1" property="center1" jdbcType="VARCHAR" />
+    <result column="time3" property="time3" jdbcType="TIMESTAMP" />
+    <result column="center2" property="center2" jdbcType="VARCHAR" />
+    <result column="time4" property="time4" jdbcType="TIMESTAMP" />
+    <result column="city2" property="city2" jdbcType="VARCHAR" />
+    <result column="time5" property="time5" jdbcType="TIMESTAMP" />
+    <result column="node2" property="node2" jdbcType="VARCHAR" />
+    <result column="time6" property="time6" jdbcType="TIMESTAMP" />
+    <result column="gaddress" property="gaddress" jdbcType="VARCHAR" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gid, sname, saddress, nid, node1, time1, city1, time2, center1, time3, center2, 
+    time4, city2, time5, node2, time6, gaddress, gname, sid, status, time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.logistics.manage.pojo.po.InfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.logistics.manage.pojo.po.InfoExample" >
+    delete from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.logistics.manage.pojo.po.Info" >
+    insert into info (id, gid, sname, 
+      saddress, nid, node1, 
+      time1, city1, time2, 
+      center1, time3, center2, 
+      time4, city2, time5, 
+      node2, time6, gaddress,
+      gname, sid, status, 
+      time)
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
+      #{saddress,jdbcType=VARCHAR}, #{nid,jdbcType=INTEGER}, #{node1,jdbcType=VARCHAR}, 
+      #{time1,jdbcType=TIMESTAMP}, #{city1,jdbcType=VARCHAR}, #{time2,jdbcType=TIMESTAMP}, 
+      #{center1,jdbcType=VARCHAR}, #{time3,jdbcType=TIMESTAMP}, #{center2,jdbcType=VARCHAR}, 
+      #{time4,jdbcType=TIMESTAMP}, #{city2,jdbcType=VARCHAR}, #{time5,jdbcType=TIMESTAMP}, 
+      #{node2,jdbcType=VARCHAR}, #{time6,jdbcType=TIMESTAMP}, #{gaddress,jdbcType=VARCHAR},
+      #{gname,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.logistics.manage.pojo.po.Info" >
+    insert into info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="saddress != null" >
+        saddress,
+      </if>
+      <if test="nid != null" >
+        nid,
+      </if>
+      <if test="node1 != null" >
+        node1,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="city1 != null" >
+        city1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="center1 != null" >
+        center1,
+      </if>
+      <if test="time3 != null" >
+        time3,
+      </if>
+      <if test="center2 != null" >
+        center2,
+      </if>
+      <if test="time4 != null" >
+        time4,
+      </if>
+      <if test="city2 != null" >
+        city2,
+      </if>
+      <if test="time5 != null" >
+        time5,
+      </if>
+      <if test="node2 != null" >
+        node2,
+      </if>
+      <if test="time6 != null" >
+        time6,
+      </if>
+      <if test="gaddress != null" >
+        gaddress,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null" >
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nid != null" >
+        #{nid,jdbcType=INTEGER},
+      </if>
+      <if test="node1 != null" >
+        #{node1,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="city1 != null" >
+        #{city1,jdbcType=VARCHAR},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="center1 != null" >
+        #{center1,jdbcType=VARCHAR},
+      </if>
+      <if test="time3 != null" >
+        #{time3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="center2 != null" >
+        #{center2,jdbcType=VARCHAR},
+      </if>
+      <if test="time4 != null" >
+        #{time4,jdbcType=TIMESTAMP},
+      </if>
+      <if test="city2 != null" >
+        #{city2,jdbcType=VARCHAR},
+      </if>
+      <if test="time5 != null" >
+        #{time5,jdbcType=TIMESTAMP},
+      </if>
+      <if test="node2 != null" >
+        #{node2,jdbcType=VARCHAR},
+      </if>
+      <if test="time6 != null" >
+        #{time6,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gaddress != null" >
+        #{gaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.logistics.manage.pojo.po.InfoExample" resultType="java.lang.Integer" >
+    select count(*) from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.gid != null" >
+        gid = #{record.gid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddress != null" >
+        saddress = #{record.saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nid != null" >
+        nid = #{record.nid,jdbcType=INTEGER},
+      </if>
+      <if test="record.node1 != null" >
+        node1 = #{record.node1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time1 != null" >
+        time1 = #{record.time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.city1 != null" >
+        city1 = #{record.city1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time2 != null" >
+        time2 = #{record.time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.center1 != null" >
+        center1 = #{record.center1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time3 != null" >
+        time3 = #{record.time3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.center2 != null" >
+        center2 = #{record.center2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time4 != null" >
+        time4 = #{record.time4,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.city2 != null" >
+        city2 = #{record.city2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time5 != null" >
+        time5 = #{record.time5,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.node2 != null" >
+        node2 = #{record.node2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time6 != null" >
+        time6 = #{record.time6,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gaddress != null" >
+        gaddress = #{record.gaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gname != null" >
+        gname = #{record.gname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update info
+    set id = #{record.id},
+      gid = #{record.gid},
+      sname = #{record.sname},
+      saddress = #{record.saddress},
+      nid = #{record.nid},
+      node1 = #{record.node1},
+      time1 = #{record.time1},
+      city1 = #{record.city1},
+      time2 = #{record.time2},
+      center1 = #{record.center1},
+      time3 = #{record.time3},
+      center2 = #{record.center2},
+      time4 = #{record.time4},
+      city2 = #{record.city2},
+      time5 = #{record.time5},
+      node2 = #{record.node2},
+      time6 = #{record.time6},
+      gaddress = #{record.gaddress},
+      gname = #{record.gname},
+      sid = #{record.sid},
+      status = #{record.status},
+      time = #{record.time}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.logistics.manage.pojo.po.Info" >
+    update info
+    <set >
+      <if test="gid != null" >
+        gid = #{gid},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname},
+      </if>
+      <if test="saddress != null" >
+        saddress = #{saddress},
+      </if>
+      <if test="nid != null" >
+        nid = #{nid},
+      </if>
+      <if test="node1 != null" >
+        node1 = #{node1},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1},
+      </if>
+      <if test="city1 != null" >
+        city1 = #{city1},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2},
+      </if>
+      <if test="center1 != null" >
+        center1 = #{center1},
+      </if>
+      <if test="time3 != null" >
+        time3 = #{time3},
+      </if>
+      <if test="center2 != null" >
+        center2 = #{center2},
+      </if>
+      <if test="time4 != null" >
+        time4 = #{time4},
+      </if>
+      <if test="city2 != null" >
+        city2 = #{city2},
+      </if>
+      <if test="time5 != null" >
+        time5 = #{time5},
+      </if>
+      <if test="node2 != null" >
+        node2 = #{node2},
+      </if>
+      <if test="time6 != null" >
+        time6 = #{time6},
+      </if>
+      <if test="gaddress != null" >
+        gaddress = #{gaddress},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="time != null" >
+        time = #{time},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.logistics.manage.pojo.po.Info" >
+    update info
+    set gid = #{gid},
+      sname = #{sname},
+      saddress = #{saddress},
+      nid = #{nid},
+      node1 = #{node1},
+      time1 = #{time1},
+      city1 = #{city1},
+      time2 = #{time2},
+      center1 = #{center1},
+      time3 = #{time3},
+      center2 = #{center2},
+      time4 = #{time4},
+      city2 = #{city2},
+      time5 = #{time5},
+      node2 = #{node2},
+      time6 = #{time6},
+      gaddress = #{gaddress},
+      gname = #{gname},
+      sid = #{sid},
+      status = #{status},
+      time = #{time}
+    where id = #{id}
+  </update>
+</mapper>

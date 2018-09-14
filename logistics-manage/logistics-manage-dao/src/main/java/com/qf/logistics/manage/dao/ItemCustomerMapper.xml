@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.ItemCustomerMapper" >
+  <sql id="Base_Column_List" >
+    id, gid, sname, saddress, nid, node1, time1, city1, time2, center1, time3, center2,
+    time4, city2, time5, node2, time6, gaddress, gname, sid, status, time
+  </sql>
+  <!--查询所有数据-->
+
+  <select id="CountItems" resultType="_long">
+    select count(1) from info where info.status!=2
+   <if test="send.gid!=null and send.gid!=0">
+    and info.gid like '%${send.gid}%'
+    </if>
+  </select>
+<!--分页查询的方法-->
+
+  <select id="listItemByPage"  resultType="com.qf.logistics.manage.pojo.po.Info">
+    select  <include refid="Base_Column_List" />
+    from info where info.status!=2
+    <if test="send.gid!=null and send.gid!=0">
+
+      and info.gid like '%${send.gid}%'
+    </if>
+    limit #{page.offset},#{page.limit}
+  </select>
+
+
+  <!--联合查询-->
+ <!-- <select id="SelectByGid"  resultType="com.qf.logistics.manage.pojo.po.Info">
+    select  <include refid="Base_Column_List" />
+    from info
+    <where>
+
+      <if test="gid!=null and gid!=0">
+        and gid=#{gid}
+      </if>
+    </where>
+    limit #{offset},#{limit}
+  </select>-->
+
+<!--根据gid查询一条记录-->
+  <select id="SelectByGid" resultType="com.qf.logistics.manage.pojo.po.Info" >
+    select  <include refid="Base_Column_List" />
+    from info where gid=#{send.gid}
+  </select>
+  <!--插入数据的方法-->
+  <insert id="InsertItem" parameterType="com.qf.logistics.manage.pojo.po.Info" >
+    insert into info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="saddress != null" >
+        saddress,
+      </if>
+      <if test="nid != null" >
+        nid,
+      </if>
+      <if test="node1 != null" >
+        node1,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="city1 != null" >
+        city1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="center1 != null" >
+        center1,
+      </if>
+      <if test="time3 != null" >
+        time3,
+      </if>
+      <if test="center2 != null" >
+        center2,
+      </if>
+      <if test="time4 != null" >
+        time4,
+      </if>
+      <if test="city2 != null" >
+        city2,
+      </if>
+      <if test="time5 != null" >
+        time5,
+      </if>
+      <if test="node2 != null" >
+        node2,
+      </if>
+      <if test="time6 != null" >
+        time6,
+      </if>
+      <if test="gaddress != null" >
+        gaddress,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="gid != null" >
+        #{gid},
+      </if>
+      <if test="sname != null" >
+        #{sname},
+      </if>
+      <if test="saddress != null" >
+        #{saddress},
+      </if>
+      <if test="nid != null" >
+        #{nid},
+      </if>
+      <if test="node1 != null" >
+        #{node1},
+      </if>
+      <if test="time1 != null" >
+        #{time1},
+      </if>
+      <if test="city1 != null" >
+        #{city1},
+      </if>
+      <if test="time2 != null" >
+        #{time2},
+      </if>
+      <if test="center1 != null" >
+        #{center1},
+      </if>
+      <if test="time3 != null" >
+        #{time3},
+      </if>
+      <if test="center2 != null" >
+        #{center2},
+      </if>
+      <if test="time4 != null" >
+        #{time4},
+      </if>
+      <if test="city2 != null" >
+        #{city2},
+      </if>
+      <if test="time5 != null" >
+        #{time5},
+      </if>
+      <if test="node2 != null" >
+        #{node2},
+      </if>
+      <if test="time6 != null" >
+        #{time6},
+      </if>
+      <if test="gaddress != null" >
+        #{gaddress},
+      </if>
+      <if test="gname != null" >
+        #{gname},
+      </if>
+      <if test="sid != null" >
+        #{sid},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="time != null" >
+        #{time},
+      </if>
+    </trim>
+  </insert>
+  <!--根据订单号更新物流状态的方法-->
+  <update id="UpdateItem" parameterType="com.qf.logistics.manage.pojo.po.Info">
+    update info
+    <set >
+      <if test="id != null and id!=''" >
+        id = #{id},
+      </if>
+      <if test="sname != null and sname!='' " >
+        sname = #{sname},
+      </if>
+      <if test="saddress != null and saddress!=''" >
+        saddress = #{saddress},
+      </if>
+      <if test="nid != null and nid!=''" >
+        nid = #{nid},
+      </if>
+      <if test="node1 != null and node1!=''" >
+        node1 = #{node1},
+      </if>
+      <if test="time1 != null and time1!=''" >
+        time1 = #{time1},
+      </if>
+      <if test="city1 != null and city1!=''" >
+        city1 = #{city1},
+      </if>
+      <if test="time2 != null and time2!=''" >
+        time2 = #{time2},
+      </if>
+      <if test="center1 != null and center1!=''" >
+        center1 = #{center1},
+      </if>
+      <if test="time3 != null and time3!=''" >
+        time3 = #{time3},
+      </if>
+      <if test="center2 != null and center2!=''" >
+        center2 = #{center2},
+      </if>
+      <if test="time4 != null and time4!=''" >
+        time4 = #{time4},
+      </if>
+      <if test="city2 != null and city2!=''" >
+        city2 = #{city2},
+      </if>
+      <if test="time5 != null and time5!=''" >
+        time5 = #{time5},
+      </if>
+      <if test="node2 != null and node2!=''" >
+        node2 = #{node2},
+      </if>
+      <if test="time6 != null and time6!=''" >
+        time6 = #{time6},
+      </if>
+      <if test="gaddress != null and gaddress!=''" >
+        gaddress = #{gaddress},
+      </if>
+      <if test="gname != null and gname !=''" >
+        gname = #{gname},
+      </if>
+      <if test="sid != null and sid !=''" >
+        sid = #{sid},
+      </if>
+      <if test="status != null and status!=''" >
+        status = #{status},
+      </if>
+      <if test="time != null and time!=''" >
+        time = #{time},
+      </if>
+    </set>
+    where gid = #{gid}
+  </update>
+
+</mapper>
