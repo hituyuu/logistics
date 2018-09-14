@@ -25,10 +25,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="logistics-manage-service" />
-    <orderEntry type="module" module-name="logistics-manage-dao" />
-    <orderEntry type="module" module-name="logistics-manage-pojo" />
-    <orderEntry type="module" module-name="logistics-manage-interface" />
+    <orderEntry type="module" module-name="logistics-portal-service" />
+    <orderEntry type="module" module-name="logistics-portal-dao" />
+    <orderEntry type="module" module-name="logistics-portal-pojo" />
+    <orderEntry type="module" module-name="logistics-portal-interface" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet.jsp:jsp-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="logistics-commons" />
+        <module name="logistics-manage-dao" />
+        <module name="logistics-manage-interface" />
+        <module name="logistics-manage-pojo" />
+        <module name="logistics-manage-service" />
+        <module name="logistics-manage-web" />
+        <module name="logistics-portal-dao" />
+        <module name="logistics-portal-interface" />
+        <module name="logistics-portal-pojo" />
+        <module name="logistics-portal-service" />
+        <module name="logistics-portal-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="logistics-commons" target="1.8" />
+      <module name="logistics-manage" target="1.8" />
+      <module name="logistics-manage-dao" target="1.8" />
+      <module name="logistics-manage-interface" target="1.8" />
+      <module name="logistics-manage-pojo" target="1.8" />
+      <module name="logistics-manage-service" target="1.8" />
+      <module name="logistics-manage-web" target="1.8" />
+      <module name="logistics-parent" target="1.8" />
+      <module name="logistics-portal" target="1.8" />
+      <module name="logistics-portal-dao" target="1.8" />
+      <module name="logistics-portal-interface" target="1.8" />
+      <module name="logistics-portal-pojo" target="1.8" />
+      <module name="logistics-portal-service" target="1.8" />
+      <module name="logistics-portal-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

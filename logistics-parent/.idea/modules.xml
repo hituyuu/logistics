@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../logistics-commons/logistics-commons.iml" filepath="$PROJECT_DIR$/../logistics-commons/logistics-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-dao/logistics-manage-dao.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage-dao/logistics-manage-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-interface/logistics-manage-interface.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage-interface/logistics-manage-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-pojo/logistics-manage-pojo.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage-pojo/logistics-manage-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-service/logistics-manage-service.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage-service/logistics-manage-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-web/logistics-manage-web.iml" filepath="$PROJECT_DIR$/../logistics-manage/logistics-manage-web/logistics-manage-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-parent.iml" filepath="$PROJECT_DIR$/logistics-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-dao/logistics-portal-dao.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal-dao/logistics-portal-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-interface/logistics-portal-interface.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal-interface/logistics-portal-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-pojo/logistics-portal-pojo.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal-pojo/logistics-portal-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-service/logistics-portal-service.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal-service/logistics-portal-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-web/logistics-portal-web.iml" filepath="$PROJECT_DIR$/../logistics-portal/logistics-portal-web/logistics-portal-web.iml" />
+    </modules>
+  </component>
+</project>

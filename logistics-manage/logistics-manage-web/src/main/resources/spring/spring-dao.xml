@@ -33,7 +33,7 @@
     <!--5.mapper接口扫描-->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.qf.shop.manager.dao"/>
+        <property name="basePackage" value="com.qf.logistics.manage.dao"/>
     </bean>
 
 

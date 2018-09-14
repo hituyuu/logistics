@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by Administrator on 2018/8/30.
  */
+
 @Controller
 //@RequestMapping("/user")
 public class LoginAction {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/../logistics-commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-manage/logistics-manage-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../logistics-portal/logistics-portal-web" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

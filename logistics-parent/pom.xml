@@ -11,6 +11,7 @@
     <modules>
         <module>../logistics-manage</module>
         <module>../logistics-commons</module>
+        <module>../logistics-portal</module>
     </modules>
 
     <!--jar包版本号的同一管理-->
