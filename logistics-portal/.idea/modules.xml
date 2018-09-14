@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal.iml" filepath="$PROJECT_DIR$/logistics-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal-dao/logistics-portal-dao.iml" filepath="$PROJECT_DIR$/logistics-portal-dao/logistics-portal-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal-interface/logistics-portal-interface.iml" filepath="$PROJECT_DIR$/logistics-portal-interface/logistics-portal-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal-pojo/logistics-portal-pojo.iml" filepath="$PROJECT_DIR$/logistics-portal-pojo/logistics-portal-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal-service/logistics-portal-service.iml" filepath="$PROJECT_DIR$/logistics-portal-service/logistics-portal-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logistics-portal-web/logistics-portal-web.iml" filepath="$PROJECT_DIR$/logistics-portal-web/logistics-portal-web.iml" />
+    </modules>
+  </component>
+</project>

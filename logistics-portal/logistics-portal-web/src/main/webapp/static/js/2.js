@@ -1,0 +1,2 @@
+﻿document.write("<div id='ad_1'>广告加载中...</div>");
+var ad_1 = new ad('ad_1',[['http://bestweb.oss-cn-hangzhou.aliyuncs.com/best/index/1.jpg','http://www.800best.com/Supply-Chain/ofcp/','5000','_blank']],'480','210');
