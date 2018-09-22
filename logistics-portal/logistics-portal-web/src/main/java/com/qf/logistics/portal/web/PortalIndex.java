@@ -16,7 +16,9 @@ public class PortalIndex {
 
     @RequestMapping("/net")
     public String net(){
+
         return "net/net";
     }
 
 }
+
