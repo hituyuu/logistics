@@ -6,6 +6,7 @@ import com.qf.logistics.manage.service.ItemIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import java.util.List;
  * Date 2018/9/22 9:51.
  * Description:solr索引库导入的控制器
  */
+@Controller
 public class IndexImportAction {
     /**
      * 代码规范, = 前后都要空一格
@@ -31,7 +33,7 @@ public class IndexImportAction {
     @ResponseBody
     public ResultMessage importIndex(){
 
-        System.out.println("控制器访问了");
+        System.out.println("solr索引库控制器访问了");
         ResultMessage resultMessage=new ResultMessage();
 
         // 空行不能过多,一行就够

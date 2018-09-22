@@ -1,4 +1,4 @@
-package com.qf.shop.manager.pojo.dto;
+package com.qf.logistics.manage.pojo.dto;
 
 /**
  * 用于分页查询的参数封装成pojo.但由于其他的模块也很有可能

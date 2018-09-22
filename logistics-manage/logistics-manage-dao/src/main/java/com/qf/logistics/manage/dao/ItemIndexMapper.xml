@@ -5,7 +5,7 @@
     i.id,i.title,i.sell_point AS sellPoint,i.price,i.image,tc.name AS catName
   </sql>
 
-  <select id="listAllIndex" resultType="com.qf.shop.manager.pojo.vo.ItemIndexVO">
+  <select id="listAllIndex" resultType="com.qf.logistics.manage.pojo.vo.ItemIndexVO">
     SELECT <include refid="basesql"></include>
     FROM tb_item i
     LEFT JOIN tb_item_cat tc

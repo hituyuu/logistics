@@ -1,5 +1,6 @@
 package com.qf.logistics.commons.pojo.dto;
 
+
 import java.io.Serializable;
 import java.util.List;
 

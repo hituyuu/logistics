@@ -24,8 +24,9 @@ public class ItemAction {
     private Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-private ItemService itemservice;
-  @ResponseBody
+    private ItemService itemservice;
+
+    @ResponseBody
     @RequestMapping(value = "/items" ,method = RequestMethod.GET)
     public ItemResult<Info> listItemsByPage(PageInfo page,Send send){
         ItemResult<Info> result=null;

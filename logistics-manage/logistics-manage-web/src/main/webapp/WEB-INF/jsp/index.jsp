@@ -160,7 +160,7 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe756;</i>
-                    <cite>收派单管理</cite>
+                    <cite>索引库管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
@@ -168,6 +168,23 @@
                         <a _href="./pages/indexlib/list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>索引库列表</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe756;</i>
+                    <cite>收派件管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="./pages/delivery/list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>收件列表</cite>
                         </a>
                     </li>
                 </ul>

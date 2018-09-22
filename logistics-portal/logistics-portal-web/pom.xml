@@ -48,7 +48,7 @@
     </dependencies>
 
     <build>
-        <finalName>shop-manager-web</finalName>
+        <finalName>logistics-manager-web</finalName>
         <plugins>
             <!--Tomcat的maven插件的坐标-->
             <plugin>

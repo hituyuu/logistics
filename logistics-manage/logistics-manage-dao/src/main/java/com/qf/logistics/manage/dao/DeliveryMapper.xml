@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.DeliveryMapper" >
+  <sql id="Base_Column_List" >
+   d.orderId,g.bigen_addr AS beginAddr,g.jdate AS beginTime,g.end_addr AS endAddr,d.prevNet,d.prevSendTime,d.status
+  </sql>
+
+  <!--通过网店查询所有数据-->
+  <select id="countByNet" resultType="_int">
+    SELECT  count(1) FROM delivery
+    WHERE  nextNet = #{net} and status=#{status}
+  </select>
+
+  <!--分页查询的方法-->
+  <select id="listByNet"  parameterType="java.util.Map" resultType="com.qf.logistics.manage.pojo.po.DeliveryPO">
+    select  <include refid="Base_Column_List" />
+    FROM delivery d
+    LEFT JOIN goods g
+    ON d.orderId= g.id
+    where d.nextNet=#{net} AND d.status =#{deliveryPO.status}
+    limit #{page.offset},#{page.limit}
+  </select>
+
+
+  <update id="updateByOrderId" parameterType="com.qf.logistics.manage.pojo.po.DeliveryPO" >
+    UPDATE delivery SET status =#{status}
+    WHERE   orderId IN
+
+    <foreach collection="orderIds" open="(" close=")" separator="," item="orderId">
+      #{orderId}
+    </foreach>
+
+  </update>
+
+
+
+
+
+</mapper>
