@@ -32,4 +32,18 @@ public interface DeliveryService {
      * @return
      */
     int updateByOrderId(DeliveryPO deliveryPO);
+
+    /**
+     * 通过orderI的查找
+     * @param deliveryPO
+     * @return
+     */
+    DeliveryPO selectByOrderId(DeliveryPO deliveryPO);
+
+    /**
+     * 通过参数修改数据
+     * @param deliveryPO
+     * @return
+     */
+    int updateBySend(DeliveryPO deliveryPO);
 }

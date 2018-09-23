@@ -78,6 +78,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.3" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20160212" level="project" />
     <orderEntry type="module" module-name="logistics-commons" />
+    <orderEntry type="library" name="Maven: org.csource:fastdfs-client-java:1.27-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />

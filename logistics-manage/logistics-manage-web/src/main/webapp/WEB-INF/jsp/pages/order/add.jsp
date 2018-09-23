@@ -7,7 +7,8 @@
     <title>添加订单-后台管理系统-Admin 1.0</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/weadmin.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
@@ -22,122 +23,120 @@
 <div class="weadmin-body">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="we-red">*</span>用户名
+            <label for="jname" class="layui-form-label">
+                <span class="we-red">*</span>寄件人
             </label>
+
             <div class="layui-input-inline">
-                <input type="text" id="username" name="username" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" id="jname" name="jname" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="we-red">*</span>收货人
+            <label for="sname" class="layui-form-label">
+                <span class="we-red">*</span>收件人
             </label>
+
             <div class="layui-input-inline">
-                <input type="text" id="shouhuoren" name="shouhuoren" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" id="sname" name="sname" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsName" class="layui-form-label">
+                <span class="we-red">*</span>货物名字
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="goodsName" name="goodsName" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="phone" class="layui-form-label">
-                <span class="we-red">*</span>手机
+                <span class="we-red">*</span>寄件人手机
             </label>
-            <div class="layui-input-inline">
-                <input type="text" id="phone" name="phone" required="" lay-verify="phone" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="we-red">*</span>收货地址
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="shouhuodizhi" name="shouhuodizhi" required="" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="we-red">*</span>配送物流
-            </label>
-            <div class="layui-input-inline">
-                <select id="shipping" name="shipping" class="valid">
-                    <option value="shentong">申通物流</option>
-                    <option value="shunfeng">顺丰物流</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="we-red">*</span>支付方式
-            </label>
-            <div class="layui-input-inline">
-                <select name="contrller">
-                    <option>支付方式</option>
-                    <option>支付宝</option>
-                    <option>微信</option>
-                    <option>货到付款</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_email" class="layui-form-label"><span class="we-red">*</span>发票抬头</label>
-            <div class="layui-input-inline">
-                <input type="text" id="L_email" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="we-red">*</span>
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label for="desc" class="layui-form-label">商品增加
-                <a class="layui-btn layui-btn-sm layui-btn-primary" onclick="addTable();"><i class="layui-icon">&#xe608;</i> 添加</a>
-            </label>
-            <div class="layui-input-block">
-                <table class="layui-table" id="myTable">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>商品名称</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>总价</th>
-                        <th>操作</th>
-                    </tr>
 
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>haier海尔 BC-93TMPF 93升单门冰箱</td>
-                        <td>0.01</td>
-                        <td>984</td>
-                        <td>9.84</td>
-                        <td>
-                            <a style="cursor: pointer; color: blue;" onclick="removeTr(1)">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>haier海尔 BC-93TMPF 93升单门冰箱</td>
-                        <td>0.01</td>
-                        <td>984</td>
-                        <td>9.84</td>
-                        <td>
-                            <a style="cursor: pointer; color: blue;" onclick="removeTr(2)">删除</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item layui-form-text">
-            <label for="desc" class="layui-form-label">描述</label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>
+        <div class="layui-form-item">
+            <label for="phone1" class="layui-form-label">
+                <span class="we-red">*</span>收件人手机
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="phone1" name="phone1" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label for="bigenAddr" class="layui-form-label">
+                <span class="we-red">*</span>起始地址
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="bigenAddr" name="bigenAddr" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="date" class="layui-form-label">
+                <span class="we-red">*</span>寄件日期
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="date" name="date" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="weight" class="layui-form-label">
+                <span class="we-red">*</span>货物重量
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="weight" name="weight" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="endAddr" class="layui-form-label">
+                <span class="we-red">*</span>目标地址
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="endAddr" name="endAddr" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsPrice" class="layui-form-label">
+                <span class="we-red">*</span>运输费用
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="goodsPrice" name="goodsPrice" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                <span class="we-red">*</span>物流状态
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="status" name="status" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
             </label>
-            <button class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+            <button class="layui-btn" lay-filter="add" lay-submit="" id="L_repass">增加</button>
         </div>
     </form>
 </div>
@@ -145,56 +144,75 @@
     layui.extend({
         admin: '{/}../../static/js/admin'
     });
-    layui.use(['form', 'admin', 'jquery', 'table', 'layer'], function() {
+    layui.use(['form', 'admin', 'jquery', 'table', 'layer', 'laydate'], function () {
         var form = layui.form,
-            admin = layui.admin,
-            $ = layui.jquery,
-            table = layui.table,
-            layer = layui.layer;
+                admin = layui.admin,
+                $ = layui.jquery,
+                table = layui.table,
+                layer = layui.layer;
+        var laydate = layui.laydate;
 
-        //自定义验证规则
-        form.verify({
-            nikename: function(value) {
-                if(value.length < 5) {
-                    return '昵称至少得5个字符啊';
-                }
-            },
-            pass: [/(.+){6,12}$/, '密码必须6到12位'],
-            repass: function(value) {
-                if($('#L_pass').val() != $('#L_repass').val()) {
-                    return '两次密码不一致';
-                }
-            }
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date' //指定元素
         });
 
+        //自定义验证规则
+//        form.verify({
+//            nikename: function (value) {
+//                if (value.length < 5) {
+//                    return '昵称至少得5个字符啊';
+//                }
+//            },
+//            pass: [/(.+){6,12}$/, '密码必须6到12位'],
+//            repass: function (value) {
+//                if ($('#L_pass').val() != $('#L_repass').val()) {
+//                    return '两次密码不一致';
+//                }
+//            }
+//        });
+
         //监听提交
-        form.on('submit(add)', function(data) {
-            console.log(data);
+        form.on('submit(add)', function (data) {
+            var goodsView = data.field;
+            console.log(goodsView);
+            // layer.msg(JSON.stringify(data.field));
             //发异步，把数据提交给php
-            layer.alert("增加成功", {
-                icon: 6
-            }, function() {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
+            $.ajax({
+                url: '../../adsd/goods',
+                data: goodsView,
+                type: 'post',
+                dataType: 'text',
+                success: function () {
+                    layer.alert("增加成功", {
+                                icon: 6
+                            },
+                            function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                parent.location.reload();//添加数据后刷新页面
+                            });
+                }
             });
+            // $('.layui-laypage-btn').click();
             return false;
         });
 
         var num = 3;
 
-        window.addTable = function() {
+        window.addTable = function () {
             var tableHtml = "";
             tableHtml += '<tr id="tr' + num + '">' +
-                '<td>'+num+'</td>' +
-                '<td><div class="layui-input-inline"><input type="text" name="canshu1" class="layui-input"></div></td>' +
-                '<td><div class="layui-input-inline"><input type="text" name="canshu2" class="layui-input"></div></td>' +
-                '<td><div class="layui-input-inline"><input type="text" name="canshu3" class="layui-input"></div></td>' +
-                '<td><div class="layui-input-inline"><input type="text" name="canshu4" class="layui-input"></div></td>' +
-                '<td><a style="cursor: pointer; color: blue;" onclick="removeTr(' + num + ')">删除</a>' +
-                '</td>' +
-                '</tr>';
+                    '<td>' + num + '</td>' +
+                    '<td><div class="layui-input-inline"><input type="text" name="canshu1" class="layui-input"></div></td>' +
+                    '<td><div class="layui-input-inline"><input type="text" name="canshu2" class="layui-input"></div></td>' +
+                    '<td><div class="layui-input-inline"><input type="text" name="canshu3" class="layui-input"></div></td>' +
+                    '<td><div class="layui-input-inline"><input type="text" name="canshu4" class="layui-input"></div></td>' +
+                    '<td><a style="cursor: pointer; color: blue;" onclick="removeTr(' + num + ')">删除</a>' +
+                    '</td>' +
+                    '</tr>';
 
             var elements = $("#myTable").children().length; //表示id为“mtTable”的标签下的子标签的个数
 

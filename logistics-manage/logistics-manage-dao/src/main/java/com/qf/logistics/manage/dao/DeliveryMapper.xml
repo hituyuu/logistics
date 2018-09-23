@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qf.logistics.manage.dao.DeliveryMapper" >
   <sql id="Base_Column_List" >
-   d.orderId,g.bigen_addr AS beginAddr,g.jdate AS beginTime,g.end_addr AS endAddr,d.prevNet,d.prevSendTime,d.status
+   d.orderId,g.bigen_addr AS beginAddr,g.jdate AS beginTime,g.end_addr AS endAddr,d.prevNet,d.nextNet,d.prevSendTime,d.status
   </sql>
 
-  <!--通过网店查询所有数据-->
+  <!--通过网点查询数据数量-->
   <select id="countByNet" resultType="_int">
     SELECT  count(1) FROM delivery
     WHERE  nextNet = #{net} and status=#{status}
   </select>
 
-  <!--分页查询的方法-->
+  <!--根据网点分页查询-->
   <select id="listByNet"  parameterType="java.util.Map" resultType="com.qf.logistics.manage.pojo.po.DeliveryPO">
     select  <include refid="Base_Column_List" />
     FROM delivery d
@@ -21,7 +21,7 @@
     limit #{page.offset},#{page.limit}
   </select>
 
-
+  <!--收件或批量收件-->
   <update id="updateByOrderId" parameterType="com.qf.logistics.manage.pojo.po.DeliveryPO" >
     UPDATE delivery SET status =#{status}
     WHERE   orderId IN
@@ -32,8 +32,20 @@
 
   </update>
 
+  <!--通过orderId得到对象-->
+  <select id="getByOrderId" parameterType="com.qf.logistics.manage.pojo.po.DeliveryPO" resultType="com.qf.logistics.manage.pojo.po.DeliveryPO">
+    SELECT <include refid="Base_Column_List"></include>
+    FROM delivery d
+    LEFT JOIN goods g
+    ON d.orderId= g.id
+    where d.nextNet=#{nextNet} AND d.status =#{status} AND d.orderId=#{orderId}
+  </select>
 
+  <!--送件更新数据-->
+  <update id="updateBySend" parameterType="com.qf.logistics.manage.pojo.po.DeliveryPO" >
+    UPDATE delivery
+    SET status = #{status}, prevNet = #{prevNet}, nextNet = #{nextNet}
+    WHERE  orderId = #{orderId}
 
-
-
+  </update>
 </mapper>

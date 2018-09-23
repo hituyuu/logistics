@@ -5,6 +5,9 @@ import com.qf.logistics.manage.pojo.po.DeliveryPO;
 import com.qf.logistics.manage.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -34,8 +37,22 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
     public int updateByOrderId(DeliveryPO deliveryPO) {
         System.out.println("service层update执行了");
         return mapper.updateByOrderId(deliveryPO);
+    }
+
+    @Override
+    public DeliveryPO selectByOrderId(DeliveryPO deliveryPO) {
+        System.out.println("service层update执行了");
+        return mapper.getByOrderId(deliveryPO);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
+    public int updateBySend(DeliveryPO deliveryPO) {
+        System.out.println("service层update执行了");
+        return mapper.updateBySend(deliveryPO);
     }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.GoodsViewMapper">
+    <sql id="viewfield">
+  g.id, g.goods_name AS goodsName, g.goods_type AS goodsType, g.jid, g.sid, g.goods_price AS goodsPrice, g.jdate, g.weight, g.bigen_addr AS bigenAddr, g.end_addr AS endAddr,
+    g.status,j.jname,j.phone,s.sname,s.phone1
+ </sql>
+    <sql id="order" >
+        <where>
+            <![CDATA[status<3]]>
+            <if test="pageQuery != null and pageQuery.title != null and pageQuery.title != ''">
+                AND g.id LIKE '%${pageQuery.id}%'
+            </if>
+        </where>
+    </sql>
+    <select id="listGoodsByPage" resultType="com.qf.logistics.manage.pojo.vo.GoodsView">
+        select
+        <include refid="viewfield"/> FROM goods g LEFT JOIN sender j ON g.jid=j.id LEFT JOIN receiver s ON g.sid=s.id
+        <include refid="order"/> ORDER  BY g.id DESC limit #{page.offset},#{page.limit}
+    </select>
+
+    <select id="selectByJname" resultType="com.qf.logistics.manage.pojo.po.Sender">
+        select
+        id FROM sender WHERE jname=#{jname}
+    </select>
+    <select id="selectBySname" resultType="com.qf.logistics.manage.pojo.po.Receiver">
+        select
+        id FROM receiver WHERE sname=#{sname}
+    </select>
+
+    <insert id="insertSender">
+        <selectKey resultType="int" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO sender(phone,jname) VALUES (#{phone},#{jname})
+    </insert>
+
+    <insert id="insertReceiver">
+        <selectKey resultType="int" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO receiver(phone1,sname) VALUES (#{phone1},#{sname})
+    </insert>
+</mapper>

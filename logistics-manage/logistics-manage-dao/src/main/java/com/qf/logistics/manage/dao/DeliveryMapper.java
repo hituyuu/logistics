@@ -33,4 +33,18 @@ public interface DeliveryMapper {
      * @return
      */
     int updateByOrderId(DeliveryPO deliveryPO);
+
+    /**
+     * 通过orderId查询对象
+     * @param deliveryPO
+     * @return
+     */
+    DeliveryPO getByOrderId(DeliveryPO deliveryPO);
+
+    /**
+     * 送件,修改参数
+     * @param deliveryPO
+     * @return
+     */
+    int updateBySend(DeliveryPO deliveryPO);
 }

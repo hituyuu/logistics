@@ -57,7 +57,7 @@
         </form>
     </div>
     <div class="weadmin-block demoTable">
-        <button id="batReceive" class="layui-btn " data-type="getCheckData"><i class="layui-icon">&#xe650;</i>批量接收</button>
+        <button id="batReceive" class="layui-btn " data-type="getCheckData"><i class="layui-icon">&#xe650;</i>批量取消</button>
     </div>
     <table id="demo"  class="layui-hide" lay-filter="test" >
 
@@ -85,8 +85,9 @@
     </form>
 </script>
 
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">确认收件</a>
+<script type="text/html" id="unbarDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">送往下站</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit2">快递员派件</a>
 </script>
 
 <script type="text/javascript">
@@ -98,78 +99,112 @@ layui.use(['form','jquery','table'],function(){
 
 
     //render表格数据
-    var tableIns= table.render({
-        elem:'#demo'
-        ,id:'itemListTable'//此id为table的id,不是商品id
-        ,url: '${pageContext.request.contextPath}/delivery/receiveList' //数据接口
-        ,page: true //开启分页
-        ,limit:5
-        ,limits:[3,5,10]
-        ,defaultToolbar:['filter','exports','print']
-        ,cols: [[ //表头
-            {checkbox: true}//该列表示checkbox选择框
-            ,{field: 'orderId', title: '快递单号', width:120,sort:true,align:"center"}
-            ,{field: 'beginAddr', title: '始发点', width:120,align:"center"}
-            ,{field: 'beginTime', title: '始发点送出时间', width: 220,align:"center"}
-            ,{field: 'endAddr', title: '终点', width:120,align:"center"}
-            ,{field: 'prevNet', title: '上一站点', width:120,align:"center"}
-            ,{field: 'prevSendTime', title: '上站点送出时间', width: 220,align:"center"}
-            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:120,align:"center"}
-        ]]
-    })
+    var tableIns= table.render(
+        {
+            elem:'#demo'
+            ,id:'itemListTable'//此id为table的id,不是商品id
+            ,url: '${pageContext.request.contextPath}/delivery/receiveList?status=1' //数据接口
+            ,loading:true
+            ,page: true //开启分页
+            ,limit:5
+            ,limits:[3,5,10]
+            ,defaultToolbar:['filter','exports','print']
+            ,cols: [[ //表头
+                {checkbox: true}//该列表示checkbox选择框
+                ,{field: 'orderId', title: '快递单号', width:120,sort:true,align:"center"}
+                ,{field: 'beginAddr', title: '始发点', width:120,align:"center"}
+                ,{field: 'beginTime', title: '始发点送出时间', width: 220,align:"center"}
+                ,{field: 'endAddr', title: '终点', width:120,align:"center"}
+                ,{field: 'prevNet', title: '上一站点', width:120,align:"center"}
+                ,{fixed: 'right', title:'操作', toolbar: '#unbarDemo', width:220,align:"center"}
+            ]]
+            ,done:function() {
+                layer.close(index0)
+            }
+        }/*,
+        index0= layer.msg(
+            '加载中'
+            ,{
+                icon: 16
+                ,time:0
+                ,anim: -1
+                ,fixed: false
+            }
+        )*/
+    )
 
-    // 定义一个对象,只是定义,不会执行
-    var  active = {
-        reload: function(){     // active对象有个reload方法
+
+    //定义表格重载对象,注意此处只是定义,不被调用的话并不是执行
+    var  active = {             //对象名是active
+        reload: function(){     //有reload属性,属性是一个方法
             var demoReload = $('#demoReload');
-
             //执行重载
             table.reload('testReload', {
                 page: {
-                    curr: 1  //重新从第x页开始
+                    curr: tableIns.config.curr     // 获取当前页,重新从当前页开始
                 }
                 ,where: {
-                    key: {
-                        id: demoReload.val()  //重载时的追加参数,自动追加到url中
-                    }
+                    id: demoReload.val()    //此处的键值对会自动添加到tabkle.render()里的url参数后面
                 }
             });
         }
     };
 
-    // 真正调用relaod方法的地方
-    // 两个类选择器组成的后代选择器
-    $('.demoTable .layui-btn').on('click', function(){
+    //真正调用表格重载的方法在此
+    $('.demoTable .layui-btn').on('click', function(){  //两个类选项器构成的后代选择器
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
 
 
-    function receive(orderIds,status) {
-        layer.confirm("确认收件吗?",
-            function(index){
-                //console.log(id);
-                layer.close(index);
-                var indexopen = layer.msg('正在更新数据,请稍后', {icon: 16,time: 0,shade: [0.5 , '#929292' , true]});
-                $.ajax({
-                    url:'${pageContext.request.contextPath}/delivery/update',
-                    data:'orderIds='+orderIds+"&status="+status,
-                    method:'get',
-                    success:function (res) {
-                        if(res.success){
-                            layer.close(indexopen);
+    //定义一个send()方法,只是定义,不是使用
+    function send(orderId,status,obj) {
+        if(obj.event === 'edit'){
+            layer.open({
+                type:2,
+                title:"选择下一站点",
+                area:['50%','80%'],
+                shade: [0.8, '#393D49'],
+                content:'${pageContext.request.contextPath}/delivery/selectByOrderId?orderId='+orderId+"&status="+status,
+                btn:['确认','取消'],
+                yes: function(index, layero){       //点击确定按钮的回调方法
+                    var data2 = layer.getChildFrame("form",index);
+                    var data3 = $(data2).serialize();
+                    var param = decodeURIComponent(data3,true);    //重新编译,中文正常显示
+                    console.log(data3);
+                    console.log(param);
+                    layer.close(index); //如果设定了yes回调,需进行手工关闭弹出层
+
+                    // 利用layui的弹出层遮罩页面,防止客户再次点击
+                    var index2 = layer.msg("数据提交中",{icon: 16,time: 0,shade: [0.5 , '#000' , true]});
+                    // 提交数据到后台
+                    $.post(
+                        //url
+                        '${pageContext.request.contextPath}/delivery/send',
+                        //data
+                        param,
+                        //success
+                        function (res) {
                             layer.msg(res.message);
-                            location.href="${pageContext.request.contextPath}/delivery/deliveryList";
-                        }else {
-                            layer.close(indexopen);
-                            layer.msg(res.message);
+                            layer.close(index2);    // 关闭遮罩层弹窗
+                            window.location.reload(true);
                         }
-                    }
-                })
+                    )
 
-        });
+                },
+                btnAlign:'c',
+            });
+        } else{
+            layer.confirm('确认快递小哥送件吗', function(index){
+
+
+                //送件
+                layer.close(index);
+                layer.msg("已通知小哥送件");
+            });
+        }
+
     }
-
     //监听接收事件
     table.on('tool(test)', function(obj){
         var data = obj.data;
@@ -178,7 +213,7 @@ layui.use(['form','jquery','table'],function(){
         var orderIds=[orderId];
         var status=data.status;
         console.log(orderId);
-        receive(orderIds,status);
+        send(orderId,status,obj);
 
 
     });
@@ -198,8 +233,10 @@ layui.use(['form','jquery','table'],function(){
         }
         console.log(orderIds);
         console.log(status);
-        receive(orderIds,status);
+        send(orderIds,status);
     })
+
+
 
 
 });

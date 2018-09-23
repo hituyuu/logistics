@@ -7,8 +7,10 @@ import com.qf.logistics.manage.pojo.po.DeliveryPO;
 import com.qf.logistics.manage.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -98,4 +100,50 @@ public class DeliveryAction {
         }
         return resultMessage;
     }
+
+    @RequestMapping("/delivery/selectByOrderId")
+    public String selectByOrderId(DeliveryPO deliveryPO, Model model){
+
+        System.out.println("selectByOrderId执行了");
+        System.out.println("接收的orderId->"+deliveryPO.getOrderId());
+        System.out.println("接收的status->"+deliveryPO.getStatus());
+        String net = "杭州";
+        deliveryPO.setNextNet(net);
+        try {
+            DeliveryPO deliveryPO1 = service.selectByOrderId(deliveryPO);
+            model.addAttribute("deliveryPO", deliveryPO1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "pages/delivery/edit";
+    }
+
+    @RequestMapping(value = "/delivery/send", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultMessage send(DeliveryPO deliveryPO){
+        System.out.println("send()控制器执行了");
+        System.out.println("接收的参数为:orderId->"+deliveryPO.getOrderId());
+        System.out.println("接收的参数为:nextNet->"+deliveryPO.getNextNet());
+
+        // 当前登录用户所属的站点,暂时以杭州代替
+        String net = "杭州";
+        // 一旦执行后,当前的站点就将称为数据库中的prevNet
+        deliveryPO.setPrevNet(net);
+        // 一旦执行送件,原本的状体1也要改为0
+        deliveryPO.setStatus(0);
+
+        ResultMessage resultMessage = new ResultMessage();
+        try {
+            int result = service.updateBySend(deliveryPO);
+            resultMessage.setMessage("提交了"+result+"条");
+            resultMessage.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMessage.setMessage("提交失败");
+            resultMessage.setSuccess(false);
+        }
+        return resultMessage;
+
+    }
+
 }

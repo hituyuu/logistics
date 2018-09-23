@@ -55,7 +55,7 @@ public class ItemAction {
           logger.error(e.getMessage(),e);
            e.printStackTrace();
        }
-        return "forward:/WEB-INF/jsp/pages/admin/list.jsp";
+        return "forward:/WEB-INF/jsp/pages/admin/receiveList.jsp";
     }
 
     /**
@@ -131,7 +131,7 @@ public class ItemAction {
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
-        return "forward:/WEB-INF/jsp/pages/admin/list.jsp";
+        return "forward:/WEB-INF/jsp/pages/admin/receiveList.jsp";
     }
 
     @RequestMapping(value="/delete/update")
@@ -144,7 +144,7 @@ public class ItemAction {
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
-        return "forward:/WEB-INF/jsp/pages/admin/list.jsp";
+        return "forward:/WEB-INF/jsp/pages/admin/receiveList.jsp";
     }
 
 }

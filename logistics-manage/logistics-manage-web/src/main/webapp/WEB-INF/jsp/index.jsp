@@ -182,9 +182,17 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="./pages/delivery/list">
+                        <a _href="./pages/delivery/receiveList">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>收件列表</cite>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="./pages/delivery/tosendList">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>派件列表</cite>
                         </a>
                     </li>
                 </ul>

@@ -14,9 +14,18 @@ public class DeliveryPO {
     private String beginTime;
     private String endAddr;
     private String prevNet;
+    private String nextNet;
     private String prevSendTime;
     private int status;
     private String[] orderIds;
+
+    public String getNextNet() {
+        return nextNet;
+    }
+
+    public void setNextNet(String nextNet) {
+        this.nextNet = nextNet;
+    }
 
     public String[] getOrderIds() {
         return orderIds;

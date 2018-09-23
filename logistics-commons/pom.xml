@@ -17,6 +17,10 @@
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+        </dependency>
         <!--4: Spring相关 -->
         <!--Spring核心依赖 -->
         <dependency>
