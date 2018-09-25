@@ -26,7 +26,7 @@
                 昵称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_username" name="username" disabled="" value="小明" class="layui-input">
+                <input type="text" id="L_username" name="username" disabled="" value="" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

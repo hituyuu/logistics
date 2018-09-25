@@ -105,7 +105,13 @@ else{
 								<p><span class="s5"></span>用户登录</p>
 								<div class="scat">
 									<ul>
-										<li><a href="/express/cost.shtml">登录</a></li>
+										<li ><a  href="${pageContext.request.contextPath}/pages/customer/tologin">登录</a></li>
+
+										<c:if  test  = "${findCustomer.cname!=null}">
+											<li><a href="${pageContext.request.contextPath}/pages/customer/showcustomer">注销</a> </li>
+											<li><a href="${pageContext.request.contextPath}/showcustomer?cname="+${findCustomer.cname}>${findCustomer.cname} </a> </li>
+
+										</c:if>
 									</ul>
 								</div>
 							</li>

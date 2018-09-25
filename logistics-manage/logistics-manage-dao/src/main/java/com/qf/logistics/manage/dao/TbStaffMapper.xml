@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.TbStaffMapper" >
+
+       <sql id="Update_By_Example_Where_Clause" >
+              <where >
+                     <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                            <if test="criteria.valid" >
+                                   <trim prefix="(" suffix=")" prefixOverrides="and" >
+                                          <foreach collection="criteria.criteria" item="criterion" >
+                                                 <choose >
+                                                        <when test="criterion.noValue" >
+                                                               and ${criterion.condition}
+                                                        </when>
+                                                        <when test="criterion.singleValue" >
+                                                               and ${criterion.condition} #{criterion.value}
+                                                        </when>
+                                                        <when test="criterion.betweenValue" >
+                                                               and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                                        </when>
+                                                        <when test="criterion.listValue" >
+                                                               and ${criterion.condition}
+                                                               <foreach collection="criterion.value" item="listStaff" open="(" close=")" separator="," >
+                                                                      #{listStaff}
+                                                               </foreach>
+                                                        </when>
+                                                 </choose>
+                                          </foreach>
+                                   </trim>
+                            </if>
+                     </foreach>
+              </where>
+       </sql>
+
+
+
+       <sql id="Base_Column_List" >
+              id, sname, idcard, phone, jobnumber,
+              did, department, duties, education, nativeplace
+       </sql>
+
+
+       <resultMap id="BaseResultMap" type="com.qf.logistics.manage.pojo.po.TbStaff" >
+              <id column="id" property="id" jdbcType="INTEGER" />
+              <result column="sname" property="sname" jdbcType="VARCHAR" />
+              <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+              <result column="phone" property="phone" jdbcType="VARCHAR" />
+              <result column="jobnumber" property="jobnumber" jdbcType="INTEGER" />
+              <result column="did" property="did" jdbcType="INTEGER" />
+              <result column="department" property="department" jdbcType="VARCHAR" />
+              <result column="duties" property="duties" jdbcType="INTEGER" />
+              <result column="education" property="education" jdbcType="VARCHAR" />
+              <result column="nativeplace" property="nativeplace" jdbcType="VARCHAR" />
+       </resultMap>
+
+       <update id="updateByExampleSelective" parameterType="map" >
+              update staff
+              <set >
+                     <if test="record.id != null" >
+                            id = #{record.id,jdbcType=INTEGER},
+                     </if>
+                     <if test="record.sname != null" >
+                            sname = #{record.sname,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.idcard != null" >
+                            idcard = #{record.idcard,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.phone != null" >
+                            phone = #{record.phone,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.jobnumber != null" >
+                            jobnumber = #{record.jobnumber,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.did != null" >
+                            did = #{record.did,jdbcType=INTEGER},
+                     </if>
+                     <if test="record.department != null" >
+                            department = #{record.department,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.duties != null" >
+                            duties = #{record.duties,jdbcType=TINYINT},
+                     </if>
+                     <if test="record.education != null" >
+                            education = #{record.education,jdbcType=VARCHAR},
+                     </if>
+                     <if test="record.nativeplace != null" >
+                            nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+                     </if>
+              </set>
+              <if test="_parameter != null" >
+                     <include refid="Update_By_Example_Where_Clause" />
+              </if>
+       </update>
+
+
+
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.portal.dao.CustomerMapper" >
+
+       <sql id="baseSql">
+              id,cname,password
+       </sql>
+
+       <!--<resultMap type="com.qf.logistics.portal.pojo.po.Customer" id="BaseResultMap">-->
+              <!--<id column="ID" property="id"/>-->
+              <!--<result column="CNAME" property="cname"/>-->
+              <!--<result column="PASSWORD" property="password"/>-->
+       <!--</resultMap>-->
+
+      <select id="selectByName" parameterType="com.qf.logistics.portal.pojo.po.Customer" resultType="com.qf.logistics.portal.pojo.po.Customer">
+       select
+       <include refid="baseSql"></include>
+       from customer
+       where cname = #{cname}
+      </select>
+
+     <select id="selectByCame" parameterType="com.qf.logistics.portal.pojo.po.Customer" resultType="com.qf.logistics.portal.pojo.po.Customer">
+     select
+     <include refid="baseSql"></include>
+      from customer
+     where cname = #{cname}
+     </select>
+
+    <insert id="saveOneCname" parameterType="com.qf.logistics.portal.pojo.po.Customer">
+        insert INTO  customer(cname,password)
+        VALUES (#{cname},#{password})
+    </insert>
+
+</mapper>

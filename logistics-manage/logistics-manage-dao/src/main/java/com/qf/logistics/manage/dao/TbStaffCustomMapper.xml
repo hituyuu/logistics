@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.TbStaffCustomMapper" >
+
+       <sql id="Base_Column_List" >
+              i.id, i.sname, i.password,i.idcard, i.phone, i.jobnumber,
+              i.did, i.department, i.duties, i.education, i.nativeplace
+       </sql>
+
+       <sql id="Where_Clause">
+              <where>
+                     i.duties != 4 and i.sname like '%${query.sname}%'
+                     <!--<if test="query != null and query.title != null and query.title != ''">-->
+                            <!--and i.sname like '%${query.title}%'-->
+                     <!--</if>-->
+              </where>
+       </sql>
+
+       <select id="countStaffs"  resultType="long">
+              SELECT count(*) FROM staff i
+              <include refid="Where_Clause"/>
+       </select>
+
+
+       <select id="listStaffsByPage" resultType="com.qf.logistics.manage.pojo.vo.TbStaffCustom">
+              select
+              <include refid="Base_Column_List" />
+              from staff i
+              left join node c
+              on i.did = c.id
+              <include refid="Where_Clause"/>
+              order by i.id
+              limit #{page.offset},#{page.limit}
+       </select>
+
+
+       <update id="updateSelectByOneId" parameterType="com.qf.logistics.manage.pojo.po.TbStaff">
+              update staff  set  duties=4 WHERE id=#{id}
+       </update>
+
+       <select id="findSelectByOneId" parameterType="com.qf.logistics.manage.pojo.po.TbStaff" resultType="com.qf.logistics.manage.pojo.po.TbStaff">
+              select * from staff WHERE id=#{id}
+       </select>
+
+       <insert id="saveOneStaff" parameterType="com.qf.logistics.manage.pojo.po.TbStaffAdd">
+              insert INTO  staff(sname,password,idcard,phone,jobnumber,did,department,duties,education,nativeplace)
+              VALUES (#{sname},#{password},#{idcard},#{phone},#{jobnumber},#{did},#{department},#{duties},#{education},#{nativeplace})
+       </insert>
+
+       <update id="updateOneStaff" parameterType="com.qf.logistics.manage.pojo.po.TbStaffAdd">
+              UPDATE staff set phone=#{phone},jobnumber=#{jobnumber},did=#{did},department=#{department},duties=#{duties},education=#{education},nativeplace=#{nativeplace}
+              WHERE id=#{id}
+       </update>
+
+</mapper>
