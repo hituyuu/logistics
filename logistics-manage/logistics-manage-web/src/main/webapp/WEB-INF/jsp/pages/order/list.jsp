@@ -69,11 +69,7 @@
             <%--<option value="5">已作废</option>--%>
             <%--</select>--%>
             <%--</div>--%>
-            <div class="layui-inline">
-                <input type="text" name="username" id="title" placeholder="请输入订单号" autocomplete="off"
-                       class="layui-input">
-            </div>
-            <button class="layui-btn" lay-submit="" lay-filter="sreach" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+
         </form>
     </div>
     <div class="weadmin-block">

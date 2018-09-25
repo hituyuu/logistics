@@ -9,15 +9,15 @@ layui.use(['form', 'table', 'jquery', 'admin'], function () {
         admin = layui.admin;
 
     $("#btnImport").click(function(){
-        location.href="/manager/delivery/deliveryList?status=0"
+        location.href="./deliveryList?status=0"
     });
 
     $("#btnImport2").click(function(){
-        location.href="/manager/delivery/undeliveryList?status=1"
+        location.href="./undeliveryList?status=1"
     });
 
     $("#btnImport3").click(function(){
-        location.href="/manager/delivery/sendList?status=1"
+        location.href="./sendList?status=1"
     });
 
 

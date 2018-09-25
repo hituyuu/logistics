@@ -147,13 +147,11 @@ else{
 							</li>
 
 							<li class="mcat m6" id="mcat6">
-								<p><span class="s6"></span>合作加盟</p>
-								<div class="scat">
-									<ul>
-										<li><a href="/supply-chain/partner.shtml">供应链</a></li>
-										<li><a href="/freight/partner" target="_blank">快运</a></li>
-										<li><a href="http://www.800best.com/express/partner/" target="_blank">快递</a></li>
-									</ul>
+								<div class="search">
+									<form action="../../search/search" id="searchForm" name="query" method="GET">
+										<input type="text" class="text" name="keyword" id="keyword" value="" style="color: rgb(153, 153, 153); " >
+										<input type="submit" value="搜索" class="submit"/>
+									</form><div class="search_hot"></div>
 								</div>
 							</li> 
 						</ul>

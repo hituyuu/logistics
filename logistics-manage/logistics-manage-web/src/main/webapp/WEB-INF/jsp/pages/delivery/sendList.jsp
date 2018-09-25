@@ -121,16 +121,7 @@ layui.use(['form','jquery','table'],function(){
             ,done:function() {
                 layer.close(index0)
             }
-        }/*,
-        index0= layer.msg(
-            '加载中'
-            ,{
-                icon: 16
-                ,time:0
-                ,anim: -1
-                ,fixed: false
-            }
-        )*/
+        }
     )
 
 
