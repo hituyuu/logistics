@@ -154,7 +154,7 @@ else{
 
 							<li class="mcat m6" id="mcat6">
 								<div class="search">
-									<form action="../../search/search" id="searchForm" name="query" method="GET">
+									<form action="../logistics-search-web/search/search" id="searchForm" name="query" method="GET">
 										<input type="text" class="text" name="keyword" id="keyword" value="" style="color: rgb(153, 153, 153); " >
 										<input type="submit" value="搜索" class="submit"/>
 									</form><div class="search_hot"></div>

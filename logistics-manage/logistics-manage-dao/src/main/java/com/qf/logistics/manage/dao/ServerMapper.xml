@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.logistics.manage.dao.ServerMapper" >
+
+  <sql id="Base_Column_List" >
+     id,servicecompy,freight,days
+  </sql>
+
+  <select id="servercount" resultType="_long">
+    select count(1)
+    from servers
+  </select>
+
+  <select id="listserverByPage" parameterType="com.qf.logistics.manage.pojo.dto.PageInfo" resultType="com.qf.logistics.manage.pojo.dto.Servers">
+    select
+    <include refid="Base_Column_List" />
+    from servers
+    limit #{offset},#{limit}
+  </select>
+
+  <insert id="insert" parameterType="com.qf.logistics.manage.pojo.dto.Servers">
+    insert into servers(servicecompy,freight,days) VALUES (#{servicecompy},#{freight},#{days})
+  </insert>
+  <delete id="delete" parameterType="com.qf.logistics.manage.pojo.dto.Servers">
+
+    delete from servers where id=#{id}
+
+  </delete>
+
+  <update id="update" parameterType="com.qf.logistics.manage.pojo.dto.Servers">
+
+    UPDATE servers set servicecompy=#{servicecompy},freight=#{freight},days=#{days} WHERE id=#{id}
+
+  </update>
+  <select id="selectbyId" parameterType="com.qf.logistics.manage.pojo.dto.Servers" resultType="com.qf.logistics.manage.pojo.dto.Servers">
+
+    select * from servers where id=#{id};
+
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+  update servers
+  <set>
+  <if test="record.id != null">
+  id = #{record.id,jdbcType=INTEGER},
+  </if>
+  <if test="record.servicecompy != null">
+  servicecompy = #{record.servicecompy,jdbcType=VARCHAR},
+  </if>
+  <if test="record.freight != null">
+  freight = #{record.freight,jdbcType=DOUBLE},
+  </if>
+  <if test="record.days != null">
+  days = #{record.days,jdbcType=INTEGER},
+  </if>
+  </set>
+  <if test="_parameter != null">
+  <include refid="Base_Column_List" />
+  </if>
+  </update>
+  <select id="selectbyservice" parameterType="java.lang.String" resultType="com.qf.logistics.manage.pojo.dto.Servers">
+
+    select * from servers where servicecompy LIKE "%"#{servicecompy}"%";
+
+  </select>
+<select id="select" parameterType="com.qf.logistics.manage.pojo.dto.Servers" resultType="com.qf.logistics.manage.pojo.dto.Servers">
+
+  SELECT * from servers;
+
+</select>
+
+</mapper>

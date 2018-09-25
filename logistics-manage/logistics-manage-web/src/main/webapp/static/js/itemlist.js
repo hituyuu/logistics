@@ -4,7 +4,7 @@ layui.extend({
     admin: '{/}../../static/js/admin'
 });
 //按需加载admin.js
-layui.use(['admin', 'jquery', 'table'], function () {
+layui.use(['admin', 'jquery', 'table','form',], function () {
     //初始化变量
     var admin = layui.admin,
         $ = layui.jquery,
@@ -18,15 +18,19 @@ layui.use(['admin', 'jquery', 'table'], function () {
         //渲染的容器是谁
         elem: '#articleList',
         //异步提交请求给后台返回JSON
-        url: '../../items',
+        url: '../../item',
         //要显示的表头是什么
+
+
+
         cols: [[
             {type: 'checkbox'},
             {field: 'id', title: '商品编号'},
-            {field: 'title', title: '商品名称'},
-            {field: 'sellPoint', title: '商品卖点'},
-            {field: 'catName', title: '分类名称'},
-            {field: 'status', title: '商品状态', templet: '#myTpl'}
+            {field: 'servicecompy', title: '服务公司'},
+            {field: 'freight', title: '运费'},
+            {field: 'days', title: '天数'},
+            {fixed: 'right', title: '操作', align:'center', toolbar: '#operateTpl'}
+
         ]]
         // ,done:function(res,curr,count){
         //     // var $statusCol = $("[data-field='status']");//商品状态这一列
@@ -51,71 +55,116 @@ layui.use(['admin', 'jquery', 'table'], function () {
         // }
     });
 
-    //
-    var active = {
-        getCheckData: function () {
-            //你点击了"批量删除"
-            //为了获取到被选中的行
-            var data = table.checkStatus("articleList").data;
-            if (data.length > 0) {
-                //确认框
-                //至少选中一行
-                //为了获得所有选中行的id
-                var ids = [];
-                for (var i = 0; i < data.length; i++) {
-                    ids.push(data[i].id);
-                }
-                //异步提交到后台 ids
-                $.post(
-                    '../../item/batch',
-                    {'ids[]': ids},
-                    function (data) {
-                        //至少删除一条记录
-                        if (data > 0) {
-                            //停留在原来页面刷新
-                            $('.layui-laypage-btn').click();//主动触发点击事件
-                            layer.msg("恭喜，删除成功！", {icon: 1});
-                        }
 
-                    }
-                );
-            } else {
-                //没有选中
-                layer.msg("请选择至少一行后再批量删除！", {icon: 2});
-            }
-        },
-        reload:function(){
-            //模糊查询，提交一个异步请求到后台 {title}
-            //val() 文本框 单选按钮 复选按钮
-            //text()  html()
-            var title = $("#title").val();
-            //不为空
-            if($.trim(title).length > 0 ){
-                //文本框中有内容，表格重载
-                table.reload("articleList",{
-                    page:{curr:1},
-                    where:{title:title}
-                });
-            }
-
-        }
-    };
 
     //点击"批量删除"按钮触发的事件
+    //点击"批量删除"按钮触发的事件
+    //点击"批量删除"按钮触发的事件
     $(".demoTable .layui-btn-danger").on('click', function () {
-        //为了获取data-type属性
-        var type = $(this).data("type");//getCheckData
-        //判断是否具有getCheckData，若有，那么直接调用，否则什么都不做
-        active[type] ? active[type].call(this) : '';
+        var data = table.checkStatus("articleList").data;
+        if(data.length > 0){
+            var ids = [];
+            for (var i = 0; i < data.length; i++) {
+                ids.push(data[i].id);
+            }
+            $.post(
+                //url:这次异步请求提交给谁处理,string
+                '../../item/batch',
+                //data:提交什么给后台处理,object
+                {'ids[]': ids},
+                //success:成功的回调函数,function
+                function (data) {
+                    if (data > 0) {
+                        //停留在原来页面刷新
+                        $('.layui-laypage-btn').click();
+                        layer.msg("恭喜，删除成功！", {icon: 1});
+                    }
+                },
+                //dataType:返回类型,string
+                'json'
+            );
+
+        }else {
+            layer.msg("请至少选中一行再批量删除！", {icon: 2});
+        }
     });
 
     //点击"模糊查询"按钮触发的事件
-    $(".weadmin-body .layui-btn").on('click', function () {
-        //为了获取按钮的data-type属性
-        var type = $(this).data("type");//reload
-        //判断active变量中是否具有reload属性
-        active [type]? active[type].call(this) : '';
+    // $(".weadmin-body .layui-btn").on('click', function () {
+    //     //为了获取按钮的data-type属性
+    //     var type = $(this).data("type");//reload
+    //     //判断active变量中是否具有reload属性
+    //     active[type] ? active[type].call(this) : '';
+    // });
+
+    //点击"模糊查询"按钮触发的事件
+    //$(".layui-row .layui-btn").on('click',function(){
+    //    //获取相关属性
+    //    var type = $(this).data('type');//reload
+    //    //判断active对象有没有这个属性
+    //    active[type] ? active[type].call(this) : '';
+    //
+    //});
+//点击删除触发事件
+    table.on('tool(test)',function(obj){
+
+        var data = obj.data;//获得当前行数据
+
+        var id = data.id;
+
+        var layEvent = obj.event;//获得 lay-event 对应的值
+
+        //alert(id);
+
+        if(layEvent === 'delete'){
+            //alert('查看操作');
+
+            //遍历父级tr，取第一个，然后查找第二个td，取值
+
+            layer.confirm('确定删除吗？',{
+                    btn: ['确认', '取消']
+                }, function(){
+                    $.get(
+                        '../../item/delete',
+                        {'id': id},
+                        function (data) {
+
+                            if (data > 0) {
+                                //停留在原来页面刷新
+                                $('.layui-laypage-btn').click();
+                                layer.msg("恭喜，修改成功！", {icon: 2});
+                            }else {
+                                //停留在原来页面刷新
+                                $('.layui-laypage-btn').click();
+                                layer.msg("删除成功！", {icon: 1});
+                            }
+                        }
+                    );
+                },function(){
+
+                    $('.layui-laypage-btn').click();
+
+                }
+            );
+        }else if(layEvent === 'edit'){
+
+
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+
+
+            //layer.msg('编辑操作');
+            $.post(
+                '../../item/update',
+                {'id': id}
+            );
+
     });
 
 
+
+
 });
+
+
+

@@ -48,34 +48,23 @@
 </div>
 <div class="weadmin-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 we-search" onsubmit="return false;">
-            商品搜索：
-            <div class="layui-inline">
-                <input type="text" id="title" name="title" placeholder="请输入商品名称关键字" autocomplete="off" class="layui-input">
-            </div>
-            <button class="layui-btn" lay-submit="" lay-filter="search" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+
     </div>
     <div class="weadmin-block demoTable">
-        <button id="delete" class="layui-btn layui-btn-danger" data-type="getCheckData"><i class="layui-icon">&#xe640;</i>批量删除</button>
         <button class="layui-btn" onclick="WeAdminShow('添加商品','./add',600,500)"><i class="layui-icon">&#xe61f;</i>添加</button>
     </div>
     <table id="demo"  class="layui-hide" lay-filter="test" >
 
-    </table>
-
-
+    </table >
+    <table class="layui-hide" id="adminlist" lay-filter="test"></table>
 
     <script type="text/html" id="operateTpl">
-        <a title="编辑" onclick="WeAdminEdit('编辑','./edit', 2, 600, 400)" href="javascript:;">
-            <i class="layui-icon">&#xe642;</i>
+
+        <a class="layui-btn layui-btn-danger layui-btn-xs" title="删除" lay-event="delete" href="javascript:;">
+            <i class="layui-icon">&#xe640;</i>删除
         </a>
-        <a title="删除" href="javascript:;">
-            <i class="layui-icon">&#xe640;</i>
-        </a>
+        <%--<button class="layui-btn" onclick="WeAdminShow('编辑商品','./update',600,500)"><i class="layui-icon">&#xe61f;</i>编辑</button>--%>
     </script>
-
-
 
 </div>
 </body>
@@ -124,20 +113,17 @@ layui.use(['form','jquery','table'],function(){
     //render表格数据
     var tableIns= table.render({
         elem:'#demo'
-        ,id:'itemListTable'//此id为table的id,不是商品id
-        ,url: '${pageContext.request.contextPath}/list' //数据接口
+        ,id:'itemListTable'//
+        ,url: '${pageContext.request.contextPath}/item' //数据接口
         ,page: true //开启分页
         ,defaultToolbar:['filter','exports','print']
         ,cols: [[ //表头
             {checkbox: true}//该列表示checkbox选择框
             ,{field: 'id', title: '商品编号', width:100,sort:true}
-            ,{field: 'title', title: '商品名称', width:150}
-            ,{field: 'catName', title: '商品分类', width: 150,align:"center"}
-            ,{field: 'sellPoint', title: '卖点', width:200}
-            ,{field: 'price', title: '价格', width:150,sort:true}
-            ,{field: 'num', title: '库存', width: 100}
-            ,{field: 'status', title: '商品状态', width: 150,templet:'#titleTpl'}
-
+            ,{field: 'servicecompy', title: '服务公司', width:150}
+            ,{field: 'freight', title: '运费', width: 150,align:"center"}
+            ,{field: 'days', title: '天数', width:200}
+            ,{fixed: 'right', title: '操作', align:'center', toolbar: '#operateTpl'}
         ]]
     })
 
@@ -216,19 +202,6 @@ layui.use(['form','jquery','table'],function(){
         console.log(data);
     });
 
-    $("#delete").on('click',function(){//jquery监听点击删除按钮事件
-        var checkStatus=table.checkStatus('itemListTable');
-        //上述是获取table中被选中的行的所有信息,包括商品数据和其他信息
-        console.log(checkStatus);
-        console.log("所选行的数据的id为:");
-        console.log(checkStatus.data[0].id);
-        console.log("所选行的数据的title为:");
-        console.log(checkStatus.data[0].title);
-        console.log("所选行的数据的status为:");
-        console.log(checkStatus.data[0].status);
-        console.log(checkStatus.isAll);
-
-    })
 
     var $mylist = $("#demo").next('.layui-table-view').find('table.layui-table');
     $mylist.dblclick(function(event){
@@ -241,6 +214,35 @@ layui.use(['form','jquery','table'],function(){
         console.log(obj.field); //当前编辑的字段名
         console.log(obj.data); //所在行的所有相关数据
     });
+
+    var active = {
+        reload: function(){
+            var servicecompy= $.trim($("#title").val());
+            var page =tableIns.config.page.curr;
+            if(servicecompy!=""){
+                //执行重载
+                tableIns.reload( {
+                    page: {
+                        curr: page //重新从第 1 页开始
+                    }
+                    ,where: {
+                        servicecompy: servicecompy
+                    }
+                });
+            }else{
+                layer.msg("请先输入内容!")
+            }
+        }
+    };
+
+//模糊查询按钮
+    $("#search").on('click',function(){
+
+        var type = $(this).data('type');
+
+        active[type] ? active[type].call(this) : '';
+    })
+
 
 })
 

@@ -23,7 +23,7 @@
 
 <body>
 <div class="weadmin-body">
-    <form class="layui-form" action="${pageContext.request.contextPath}/insert">
+    <form class="layui-form" action="${pageContext.request.contextPath}/update.do">
         <%--<div class="layui-form-item">--%>
             <%--<label for="cid" class="layui-form-label">--%>
                 <%--<span class="we-red">*</span>商品类别--%>
@@ -32,19 +32,20 @@
                 <%--<input type="text" id="cid" lay-filter="demo" autocomplete="off" class="layui-input">--%>
             <%--</div>--%>
         <%--</div>--%>
+
         <div class="layui-form-item">
             <label for="servicecompy" class="layui-form-label">
                 <span class="we-red">*</span>服务公司
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="servicecompy" name="servicecompy" required="" lay-verify="required" autocomplete="off"
+                <input type="text" id="servicecompy" name="servicecompy" value="${servers.servicecompy}" required="" lay-verify="required" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label for="freight" class="layui-form-label">运费</label>
             <div class="layui-input-block">
-                <input placeholder="运费" id="freight" name="freight" class="layui-input">
+                <input placeholder="运费" id="freight" name="freight" value="${servers.freight}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -52,7 +53,7 @@
                 <span class="we-red">*</span>天数
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="days" name="days" required="" lay-verify="number" autocomplete="off"
+                <input type="text" id="days" name="days" value="${servers.days}" required="" lay-verify="number" autocomplete="off"
                        class="layui-input">
 
             </div>
@@ -83,9 +84,9 @@
             <%--</div>--%>
         <%--</div>--%>
         <div class="layui-form-item">
-            <label for="add" class="layui-form-label">
+            <label for="eidt" class="layui-form-label">
             </label>
-            <button id="add" class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+            <button id="eidt" class="layui-btn" lay-filter="eidt" lay-submit="">编辑</button>
         </div>
     </form>
 </div>
@@ -94,12 +95,15 @@
         admin: '{/}../../static/js/admin',
         treeselect: '{/}../../static/js/treeselect'
     });
-    layui.use(['form', 'admin','layer', 'layedit', 'treeselect'], function () {
+    layui.use(['form', 'admin','layer', 'layedit', 'treeselect'], function (obj) {
         var form = layui.form,
 //            admin = layui.admin,
             layer = layui.layer,
             layedit = layui.layedit,
             treeselect = layui.treeselect;
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+        var tr = obj.tr; //获得当前行 tr 的DOM对象
 
         //初始化树形下拉框
 //        treeselect.render(
@@ -134,10 +138,13 @@
 //        });
 
         //监听提交
-        form.on('submit(add)', function (data) {
+        form.on('tool(eidt)', function (obj) {
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr- 的DOM对象
             console.log(data);
             //发异步，把数据提交给php
-            layer.alert("增加成功", {
+            layer.alert("修改成功", {
                 icon: 6
             }, function () {
                 // 获得frame索引
@@ -147,8 +154,19 @@
             });
             return true;
         });
+        if(layEvent === 'eidt'){ //编辑
+            //do something
+
+            //同步更新缓存对应的值
+            obj.({
+                servicecompy: '${servicecompy}',
+                freight: '${freight}',
+                days:'${days}'
+            });
+        }
 
     });
+
 </script>
 </body>
 
